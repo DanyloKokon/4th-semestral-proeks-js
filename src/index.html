@@ -8,7 +8,26 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    
+    <header>
+      <div class="name-logo">
+        <H1 class="h1-main">Find any music from the world</H1>
+      </div>
+      <div class="searchEl">
+        <form class="form" action="submit">
+          <input
+          class="input"
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Search for a song..."
+          />
+          <button type="submit" class="btn-search">
+            <img src="./img/search-icon.svg" alt="search icon" />
+          </button>
+        </form>
+      </div>
+    </header>
+    <script type="module" src="apiToken.js"></script>
     <script type="module" src="main.js"></script>
   </body>
 </html>
