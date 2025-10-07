@@ -1,21 +1,26 @@
+import { getToken } from "./apiToken"
 
 //==============================Query Selectors==============================//
 const formEl = document.querySelector('.form')
 const inputEl = document.querySelector('.input')
 const btnEl = document.querySelector('.btn-search')
+const mainListEl = document.querySelector('.mainListEl')
 
 //==============================Logic==============================//
-const apiTocken = 'acd1a7db8f824fbc9f9bc66185b587f1'
-let query 
-const getMusic = function (name) {
-    fetch(`https://api.spotify.com/v1/search?q=${name}&type=track&market=KR`, {
+
+let query
+const getMusic = function (name, apiTocken) {
+    return fetch(`https://api.spotify.com/v1/search?q=${name}&type=track&market=KR`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer BQB3A0uLSHlXgfYqs0cTPG1L-SsNGt4WGTMwnY6-D9TiHPQsBa372IZt0Eq3LK4EOUGgK4K0H_6otdqXr1Jb8rgiBkX_0htSF072F_Rqj8Uxvnm1kw4J7GJhxHH85GtqD7ZwdVu3nxg`,
+            'Authorization': `Bearer ${apiTocken}`,
             'Content-Type': 'application/json'
         }
-    }).then(res => { 
-        return res.json() }
+    }).then(res => {
+        //console.log(res);
+        return res.json()
+
+    }
     )
 }
 
@@ -23,5 +28,63 @@ const getMusic = function (name) {
 formEl.addEventListener('submit', (e) => {
     e.preventDefault()
     query = e.currentTarget.search.value
-    getMusic(query)
+
+    getToken().then(token => {
+        getMusic(query, token.access_token).then((data) => {
+            data.tracks.items.map((items) => {
+                mainListEl.insertAdjacentHTML('beforeend', holder(items))
+            })
+        })
+        const openM = document.querySelector('[data-action="open-modal"]');
+        const backdrop = document.querySelector('.js-backdrop');
+        const modal = document.querySelector('.modal');
+        const body = document.body
+        const closeM = document.querySelector('[data-action="close-modal"]')
+
+        function onBtnClick() {
+            document.body.classList.toggle('show-modal')
+
+        }
+        openM.addEventListener('click', onBtnClick);
+        closeM.addEventListener('click', onBtnClick);
+        backdrop.addEventListener('click', (event) => {
+            if (event.currentTarget === event.target) {
+                onBtnClick()
+            }
+        });
+        window.addEventListener('keydown', (event) => {
+            //console.log(event.key);
+            if (event.key === 'Escape' && document.body.classList.contains('show-modal')) {
+                onBtnClick()
+            }
+        })
+
+
+    })
 })
+//==============================Functions==============================//
+const holder = function (sondIdNow) {
+    return `
+<button data-action="open-modal" id="openModal"><div class="outModal">
+  <img class="imgOutModal" src="${sondIdNow.album.images[0].url}" alt="">
+  <p class="pOutModal">${sondIdNow.name}</p>
+  <p>${sondIdNow.artists[0].name}</p>
+  <p>Album name ${sondIdNow.album.name}</p>
+</div></button>
+
+<div class="backdrop js-backdrop">
+      <div class="modal">
+        <h2>Modal window</h2>
+        <p>
+          
+        </p>
+        <button type="button" class="button" data-action="close-modal">
+          Закрити
+        </button>
+      </div>
+    </div>
+`}
+
+
+//==============================Modal==============================//
+
