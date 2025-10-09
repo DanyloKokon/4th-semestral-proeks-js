@@ -34,32 +34,12 @@ formEl.addEventListener('submit', (e) => {
             data.tracks.items.map((items) => {
                 mainListEl.insertAdjacentHTML('beforeend', holder(items))
             })
-        })
-        const openM = document.querySelector('[data-action="open-modal"]');
-        const backdrop = document.querySelector('.js-backdrop');
-        const modal = document.querySelector('.modal');
-        const body = document.body
-        const closeM = document.querySelector('[data-action="close-modal"]')
-
-        function onBtnClick() {
-            document.body.classList.toggle('show-modal')
-
-        }
-        openM.addEventListener('click', onBtnClick);
-        closeM.addEventListener('click', onBtnClick);
-        backdrop.addEventListener('click', (event) => {
-            if (event.currentTarget === event.target) {
-                onBtnClick()
+            if (openM){
+                openM.addEventListener('click', onBtnClick);
             }
-        });
-        window.addEventListener('keydown', (event) => {
-            //console.log(event.key);
-            if (event.key === 'Escape' && document.body.classList.contains('show-modal')) {
-                onBtnClick()
-            }
+            formEl.reset()
         })
-
-
+    
     })
 })
 //==============================Functions==============================//
@@ -67,24 +47,39 @@ const holder = function (sondIdNow) {
     return `
 <button data-action="open-modal" id="openModal"><div class="outModal">
   <img class="imgOutModal" src="${sondIdNow.album.images[0].url}" alt="">
-  <p class="pOutModal">${sondIdNow.name}</p>
-  <p>${sondIdNow.artists[0].name}</p>
-  <p>Album name ${sondIdNow.album.name}</p>
+  <p class="mainOutModalp ">${sondIdNow.name}</p>
+  <p class="pOutModal">${sondIdNow.artists[0].name}</p>
+  <p class="pOutModal">Album name ${sondIdNow.album.name}</p>
 </div></button>
 
-<div class="backdrop js-backdrop">
-      <div class="modal">
-        <h2>Modal window</h2>
-        <p>
-          
-        </p>
-        <button type="button" class="button" data-action="close-modal">
-          Закрити
-        </button>
-      </div>
-    </div>
+
 `}
 
 
 //==============================Modal==============================//
+const openM = document.querySelector('[data-action="open-modal"]');
+const backdrop = document.querySelector('.js-backdrop');
+const modal = document.querySelector('.modal');
+const body = document.body
+const closeM = document.querySelector('[data-action="close-modal"]')
+
+function onBtnClick () {
+    document.body.classList.toggle('show-modal')
+    
+    }
+
+// console.log(openM);
+closeM.addEventListener('click', onBtnClick);
+backdrop.addEventListener('click', (event) => {
+    if (event.currentTarget === event.target) {
+        onBtnClick()
+    }
+} );
+window.addEventListener('keydown', (event) => {
+    //console.log(event.key);
+    if (event.key === 'Escape' && document.body.classList.contains('show-modal')) {
+        onBtnClick()
+    }
+})
+
 
