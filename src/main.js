@@ -43,6 +43,22 @@ const getMusicDetails = function (id, apiTocken) {
     }
     )
 }
+
+const recomendations = function (apiTocken) {
+    return fetch(`'https://api.spotify.com/v1/recommendations?seed_artists=6HvZYsbFfjnjFrWF950C9d&seed_genres=kpop%2Ccountry&seed_tracks=3r8RuvgbX9s7ammBn07D3W' `, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${apiTocken}`,
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        //console.log(res);
+        return res.json()
+
+    }
+    )
+}
+
     
     //==============================Event Listeners==============================//
     formEl.addEventListener('submit', (e) => {
@@ -62,6 +78,11 @@ const getMusicDetails = function (id, apiTocken) {
         })
     })
 
+    getToken().then(token => {
+        recomendations(token.access_token).then((data) => {
+            data.tracks.map((items) => {
+                mainListEl.insertAdjacentHTML('beforeend', holder(items))
+            })})})
 
     //==============================Functions==============================//
     const holder = function (sondIdNow) {

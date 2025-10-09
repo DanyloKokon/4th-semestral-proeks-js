@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./public/spotify-logo-11609377845tapdd9ujdi.svg" />
+  <link rel="icon" type="image/svg+xml" href="./img/close.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vanilla App Template</title>
   <link rel="stylesheet" href="./css/styles.css" />
@@ -28,37 +28,36 @@
     <div class="mainListEl" data-action="open-modal"></div>
 
 
-    <div class="backdrop  js-backdrop" >
+    <div class="backdrop  js-backdrop">
       <div class="modal">
-       <img class="inModalImg" src="" alt="">
-          <div>
-            <h2 class="artist">ARTIST:</h2>
-            <p class="artistP"></p>
-            <h3 class="song">SONG:</h3>
-            <p class="songP"></p>
-            <h3 class="album">ALBUM:</h3>
-            <p class="albumP"></p>
-            <h3 class="release">RELEASE DATE:</h3>
-            <p class="releaseP"></p>
-            <h3 class="listen">Listen to song:</h3>
-            <div><a class="listenA" href=""  rel="noopener noreferrer">Go to Spotify</a>
-          </div>
-        </p>
-        <button type="button" class="button" data-action="close-modal">
-          Закрити
+        <button type="button" class="button btninmod" data-action="close-modal">
+          <img src="./img/close.svg" alt="">
         </button>
+        <div class="inModalImgDiv"><img class="inModalImg" src="" alt=""></div>
+        <div>
+          <h2 class="artist modalH">ARTIST:</h2>
+          <p class="artistP modalP"></p>
+          <h3 class="song modalH">SONG:</h3>
+          <p class="songP modalP"></p>
+          <h3 class="album modalH">ALBUM:</h3>
+          <p class="albumP modalP"></p>
+          <h3 class="release modalH">RELEASE DATE:</h3>
+          <p class="releaseP modalP"></p>
+          <h3 class="listen modalH">Listen to song:</h3>
+          <div><a class="listenA modalP" href="" rel="noopener noreferrer">Go to Spotify</a>
+          </div>
+          </p>
+
+        </div>
       </div>
-    </div>
 
 
   </main>
   <footer class="footerEl container">
     <p class="footer-text">© 2025 | All Rights Reserved | Developed with ♥ by GoIT Students</p>
-  <script type="module" src="apiToken.js"></script>
-  <script type="module" src="main.js"></script>
+    <script type="module" src="apiToken.js"></script>
+    <script type="module" src="main.js"></script>
 
 </body>
 
 </html>
-
-
