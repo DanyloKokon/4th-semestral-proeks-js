@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/4th-semestral-proeks-js/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/4th-semestral-proeks-js/assets/close-9c13cf03.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanilla App Template</title>
+  
+  <script type="module" crossorigin src="/4th-semestral-proeks-js/assets/index-46f33f26.js"></script>
+  <link rel="stylesheet" href="/4th-semestral-proeks-js/assets/index-6bd689e2.css">
+</head>
+
+<body>
+  <header class="container">
+    <div class="name-logo"><img src="/4th-semestral-proeks-js/assets/bg-logo-d17a9993.svg" alt="logo">
+      <H1 class="h1-main">Find any music from the world</H1>
+    </div>
+
+    <div class="searchEl">
+      <form class="form" action="submit">
+        <input class="input" type="text" id="search" name="search" placeholder="Search for a song..." />
+        <button type="submit" class="btn-search">
+          <img src="/4th-semestral-proeks-js/assets/search-icon-42c7bad2.svg" alt="search icon" />
+        </button>
+      </form>
+    </div>
+  </header>
+  <main class="mainEl container">
+    <div class="mainListEl" data-action="open-modal">
+    </div>
+
+
+    <div class="backdrop  js-backdrop">
+      <div class="modal">
+        <button type="button" class="button btninmod" data-action="close-modal">
+          <img src="/4th-semestral-proeks-js/assets/close-9c13cf03.svg" alt="">
+        </button>
+        <div class="inModalImgDiv"><img class="inModalImg" src="" alt=""></div>
+        <div>
+          <h2 class="artist modalH">ARTIST:</h2>
+          <p class="artistP modalP"></p>
+          <h3 class="song modalH">SONG:</h3>
+          <p class="songP modalP"></p>
+          <h3 class="album modalH">ALBUM:</h3>
+          <p class="albumP modalP"></p>
+          <h3 class="release modalH">RELEASE DATE:</h3>
+          <p class="releaseP modalP"></p>
+          <h3 class="listen modalH">Listen to song:</h3>
+          <div><a class="listenA modalP" href="" rel="noopener noreferrer">Go to Spotify</a>
+          </div>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer class="footerEl container">
+    <p class="footer-text">© 2025 | All Rights Reserved | Developed with ♥ by GoIT Students</p>
+  </footer>
     
-    <script type="module" crossorigin src="/4th-semestral-proeks-js/assets/index-425b0e7c.js"></script>
-    <link rel="stylesheet" href="/4th-semestral-proeks-js/assets/index-e903c72b.css">
-  </head>
-  <body>
     
-    
-  </body>
+
+</body>
+
 </html>
