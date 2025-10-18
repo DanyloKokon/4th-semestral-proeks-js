@@ -1,4 +1,7 @@
+import { a } from "motion/react-client"
 import { getToken } from "./apiToken"
+import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+// const { animate, scroll } = Motion
 
 //==============================Query Selectors==============================//
 const formEl = document.querySelector('.form')
@@ -48,34 +51,41 @@ const getMusicDetails = function (id, apiTocken) {
 
 
 
-    
-    //==============================Event Listeners==============================//
-    formEl.addEventListener('submit', (e) => {
-        e.preventDefault()
-        query = e.currentTarget.search.value
 
-        getToken().then(token => {
-            getMusic(query, token.access_token).then((data) => {
-                data.tracks.items.map((items) => {
-                    mainListEl.insertAdjacentHTML('beforeend', holder(items))
+//==============================Event Listeners==============================//
+formEl.addEventListener('submit', (e) => {
+    e.preventDefault()
+    query = e.currentTarget.search.value
+
+    getToken().then(token => {
+        getMusic(query, token.access_token).then((data) => {
+            data.tracks.items.map((items) => {
+
+                mainListEl.insertAdjacentHTML('beforeend', holder(items))
+
+                mainListEl.addEventListener('click', (e) => {
+                    if (e.currentTarget){
+                        animate(e.target, { rotate: 360 }, { stiffness: 300 })
+                    }
                 })
-
-
-                formEl.reset()
             })
 
+
+            formEl.reset()
         })
+
     })
+})
 
-    // getToken().then(token => {
-    //     recomendations(token.access_token).then((data) => {
-    //         data.tracks.map((items) => {
-    //             mainListEl.insertAdjacentHTML('beforeend', holder(items))
-    //         })})})
+// getToken().then(token => {
+//     recomendations(token.access_token).then((data) => {
+//         data.tracks.map((items) => {
+//             mainListEl.insertAdjacentHTML('beforeend', holder(items))
+//         })})})
 
-    //==============================Functions==============================//
-    const holder = function (sondIdNow) {
-        return `
+//==============================Functions==============================//
+const holder = function (sondIdNow) {
+    return `
 <button data-action="open-modal" id="openModal"><div class="outModal">
   <img class="imgOutModal" id="${sondIdNow.id}" src="${sondIdNow.album.images[0].url}" alt="">
   <p class="mainOutModalp ">${sondIdNow.name}</p>
@@ -87,20 +97,20 @@ const getMusicDetails = function (id, apiTocken) {
 `}
 
 
-    //==============================Modal==============================//
-    let songId
+//==============================Modal==============================//
+let songId
 
-    const openM = document.querySelector('[data-action="open-modal"]');
-    const backdrop = document.querySelector('.js-backdrop');
-    const modal = document.querySelector('.modal');
-    const body = document.body
-    const closeM = document.querySelector('[data-action="close-modal"]')
+const openM = document.querySelector('[data-action="open-modal"]');
+const backdrop = document.querySelector('.js-backdrop');
+const modal = document.querySelector('.modal');
+const body = document.body
+const closeM = document.querySelector('[data-action="close-modal"]')
 
-    function onBtnClick(e) {
-        if (document.querySelector('#openModal')) {
-            document.body.classList.toggle('show-modal')
-            songId = e.target.id
-            getToken().then(token => {
+function onBtnClick(e) {
+    if (document.querySelector('#openModal')) {
+        document.body.classList.toggle('show-modal')
+        songId = e.target.id
+        getToken().then(token => {
             getMusicDetails(songId, token.access_token).then((data) => {
                 // Add modal content here using data
                 //textContent
@@ -115,19 +125,20 @@ const getMusicDetails = function (id, apiTocken) {
 
         })
 
-    }}
+    }
+}
 
-    openM.addEventListener('click', onBtnClick);
-    // console.log(openM);
-    closeM.addEventListener('click', onBtnClick);
-    backdrop.addEventListener('click', (event) => {
-        if (event.currentTarget === event.target) {
-            onBtnClick()
-        }
-    });
-    window.addEventListener('keydown', (event) => {
-        //console.log(event.key);
-        if (event.key === 'Escape' && document.body.classList.contains('show-modal')) {
-            onBtnClick()
-        }
-    })
+openM.addEventListener('click', onBtnClick);
+// console.log(openM);
+closeM.addEventListener('click', onBtnClick);
+backdrop.addEventListener('click', (event) => {
+    if (event.currentTarget === event.target) {
+        onBtnClick()
+    }
+});
+window.addEventListener('keydown', (event) => {
+    //console.log(event.key);
+    if (event.key === 'Escape' && document.body.classList.contains('show-modal')) {
+        onBtnClick()
+    }
+})
