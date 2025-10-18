@@ -18,6 +18,7 @@ a {
 
 /* ".img/header-bg.png" */
 header {
+  background-color: black;
   background-image: url("../img/header-bg.png");
   width: 100%;
   height: 446px;
@@ -87,6 +88,10 @@ header {
   background-image: url("../img/noise-body.png");
   width: 100%;
   height: 100%;
+}
+
+.tui-pagination{
+background-color: black;
 }
 
 .outModal {
@@ -222,8 +227,8 @@ body.show-modal .modal {
 }
 
 .inModalImg {
-  width: 500px;
-  height: 500px;
+  width: 350px;
+  height: 350px;
   border-radius: 20px;
   margin-bottom: 20px;
 
@@ -234,16 +239,39 @@ body.show-modal .modal {
   justify-content: center;
   display: flex;
 }
+/* 
+ .tui-page-btn{
+  border: none;
+ } */
 
 /* =====================================Adaptive==================================== */
 
-@media screen and (min-widht: 320px) {
-  .container {
-    max-width: 320px;
-  }
+.custom-page {
+
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 5px;
+  margin: 2px;
+  border-radius: 50px;
+}
+
+.custom-page.selected {
+  background: #007bff;
+  color: white;
+}
+
+.custom-move {
+  font-weight: bold;
+  color: #555;
+}
+
+.custom-ellipsis {
+  color: #999;
+}
 
 
-  .name-logo {
-    display: none;
-  }
+.tui-page-btn:hover {
+  background-color: #007bff;
+  color: white;
+  transition: all 0.2s ease-in-out;
 }

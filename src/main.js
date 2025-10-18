@@ -2,7 +2,8 @@ import { a } from "motion/react-client"
 import { getToken } from "./apiToken"
 import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
 // const { animate, scroll } = Motion
-
+const Pagination = tui.Pagination;
+// const Pagination = require('tui-pagination'); /* CommonJS */
 //==============================Query Selectors==============================//
 const formEl = document.querySelector('.form')
 const inputEl = document.querySelector('.input')
@@ -49,33 +50,99 @@ const getMusicDetails = function (id, apiTocken) {
 
 
 
+function fetchPage(query, token, offset) {
+    fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&market=KR&limit=20&offset=${offset}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => {
+            renderTracks(data.tracks.items);
+        });
+}
 
 
 
+
+
+let allContent
+let myToken
 //==============================Event Listeners==============================//
 formEl.addEventListener('submit', (e) => {
     e.preventDefault()
     query = e.currentTarget.search.value
 
     getToken().then(token => {
-        getMusic(query, token.access_token).then((data) => {
-            data.tracks.items.map((items) => {
+        myToken = token.access_token
+        // getMusic(query, myToken).then((data) => {
+        //     allContent = data.tracks.total
 
-                mainListEl.insertAdjacentHTML('beforeend', holder(items))
+        //     data.tracks.items.map((items) => {
 
-                mainListEl.addEventListener('click', (e) => {
-                    if (e.currentTarget){
-                        animate(e.target, { rotate: 360 }, { stiffness: 300 })
-                    }
-                })
-            })
+        //         mainListEl.insertAdjacentHTML('beforeend', holder(items))
+
+        //         mainListEl.addEventListener('click', (e) => {
+        //             if (e.currentTarget){
+        //                 animate(e.target, { rotate: 360 }, { stiffness: 300 })
+        //             }
+        //         })
+        //     })
 
 
-            formEl.reset()
-        })
+        //     formEl.reset()
+        // })
+        getMusic(query, myToken).then((data) => {
+            allContent = data.tracks.total;
+
+            renderTracks(data.tracks.items); // render first page
+
+            const pagination = new tui.Pagination('tui-pagination-container', {
+                totalItems: allContent,
+                itemsPerPage: 20,
+                visiblePages: 5,
+                page: 1,
+                centerAlign: true,
+                template: {
+                    page: '<a href="#" class="custom-page">{{page}}</a>',
+                    currentPage: '<strong class="custom-page selected">{{page}}</strong>',
+                    moveButton: '<a href="#" class="custom-move {{type}}">{{type}}</a>',
+                    disabledMoveButton: '<span class="custom-move disabled {{type}}">{{type}}</span>',
+                    moreButton: '<a href="#" class="custom-ellipsis">...</a>'
+                }
+
+            });
+
+            pagination.on('afterMove', (event) => {
+                const currentPage = event.page;
+                const offset = (currentPage - 1) * 20;
+
+                fetchPage(query, myToken, offset);
+            });
+
+            formEl.reset();
+        });
+
 
     })
 })
+
+
+
+
+
+
+
+function renderTracks(items) {
+    mainListEl.innerHTML = ''; // clear previous results
+
+    items.forEach((item) => {
+        mainListEl.insertAdjacentHTML('beforeend', holder(item));
+    });
+}
+
 
 // getToken().then(token => {
 //     recomendations(token.access_token).then((data) => {
@@ -142,3 +209,31 @@ window.addEventListener('keydown', (event) => {
         onBtnClick()
     }
 })
+
+//---------------------------------------------------------------------------------------
+
+//   const  pagination = new tui.Pagination('pagination', {
+//         totalItems: allContent ,
+//         itemsPerPage: 20,
+//         visiblePages: 5,
+//         page: 1,
+//         centerAlign: true,
+//         // template: {
+//         //     page: '<a href="#" class="tui-page-btn">{{page}}p</a>',
+//         //     currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}p</strong>',
+//         //     moveButton:
+//         //         '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+//         //             '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//         //         '</a>',
+//         //     disabledMoveButton:
+//         //         '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
+//         //             '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//         //         '</span>',
+//         //     moreButton:
+//         //         '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+//         //             '<span class="tui-ico-ellip">...</span>' +
+//         //         '</a>'
+//         // }
+//     });
+
+// pagination.on
