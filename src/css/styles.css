@@ -2,14 +2,14 @@
 @import url('./reset.css');
 
 
-  .container {
+.container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-body{
-   background-color: black;
+body {
+  background-color: black;
 }
 
 p,
@@ -93,8 +93,8 @@ header {
   height: 100%;
 }
 
-.tui-pagination{
-background-color: black;
+.tui-pagination {
+  background-color: black;
 }
 
 .outModal {
@@ -242,21 +242,23 @@ body.show-modal .modal {
   justify-content: center;
   display: flex;
 }
+
 /* 
  .tui-page-btn{
   border: none;
  } */
 
-/* =====================================Adaptive==================================== */
+/* =====================================Pagination==================================== */
 
 .custom-page {
- border: none;
+  border: none;
   background: #434e58;
   /* border: 1px solid #ccc; */
-  padding: 20px 20px;
+  padding: 16px 20px;
   margin: 2px;
   border-radius: 50px;
   color: white;
+  font-size: 10px;
 }
 
 .custom-page.selected {
@@ -275,13 +277,88 @@ body.show-modal .modal {
   color: #999;
 }
 
-.exhausted{
+.exhausted {
   margin-top: 40px;
   background-color: black;
   width: 1200px;
   /* height: 60px; */
 }
 
-.tui-pagination-container{
-   background-color: black;
+.tui-pagination-container {
+  background-color: black;
+}
+
+/* //=====================================Adaptive==================================== */
+
+@media (max-width: 425px) {
+  .container {
+    width: 320px;
+    max-width: 320px;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header {
+    max-width: 320px;
+    width: 320px;
+  }
+
+  .nameLogogo{
+    display: none;
+  }
+
+  .h1-main{
+    font-weight: 900;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+  }
+
+  .input{
+    width: 200px;
+  }
+
+  .tui-pagination{
+    width: 320px;
+    max-width: 320px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  }
+
+  .modal{
+    max-width: 272px;
+  }
+
+  .inModalImg{
+    width: 200px;
+    height: 200px;
+  }
+  .modalH, .modalP{
+    font-size: 14px;
+    line-height: 10px;
+  }
+
+  .mainListEl{
+    margin: 0px;
+    padding: 0px;
+    margin-left: auto;
+    /* margin-right: auto; */
+  }
+.mainEl{
+    margin: 0px;
+    padding: 0px;
+    margin-left: auto;
+    /* margin-right: auto; */
+  }
+
+  .custom-page{
+    padding: 11px 15px;
+  }
+
 }
