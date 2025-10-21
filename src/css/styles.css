@@ -8,6 +8,9 @@
   padding: 0 15px;
 }
 
+body{
+   background-color: black;
+}
 
 p,
 h2,
@@ -247,20 +250,23 @@ body.show-modal .modal {
 /* =====================================Adaptive==================================== */
 
 .custom-page {
-
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 5px 5px;
+ border: none;
+  background: #434e58;
+  /* border: 1px solid #ccc; */
+  padding: 20px 20px;
   margin: 2px;
   border-radius: 50px;
-}
-
-.custom-page.selected {
-  background: #007bff;
   color: white;
 }
 
+.custom-page.selected {
+  border: none;
+  background: #66b2ff;
+  /* color: white; */
+}
+
 .custom-move {
+  background-color: #555;
   font-weight: bold;
   color: #555;
 }
@@ -269,9 +275,13 @@ body.show-modal .modal {
   color: #999;
 }
 
+.exhausted{
+  margin-top: 40px;
+  background-color: black;
+  width: 1200px;
+  /* height: 60px; */
+}
 
-.tui-page-btn:hover {
-  background-color: #007bff;
-  color: white;
-  transition: all 0.2s ease-in-out;
+.tui-pagination-container{
+   background-color: black;
 }
