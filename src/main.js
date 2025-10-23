@@ -1,7 +1,6 @@
-import { a } from "motion/react-client"
+
 import { getToken } from "./apiToken"
-import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
-// const { animate, scroll } = Motion
+
 const Pagination = tui.Pagination;
 // const Pagination = require('tui-pagination'); /* CommonJS */
 //==============================Query Selectors==============================//
