@@ -362,3 +362,61 @@ body.show-modal .modal {
   }
 
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 768px;
+    max-width: 768px;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header {
+    max-width: 768px;
+    width: 768px;
+  }
+
+  .h1-main{
+    font-size: 30px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input{
+    width: 400px;
+  }
+
+.mainListEl{
+    margin: 0px;
+    padding: 0px;
+    padding-left: 15%;
+    
+  }
+  
+  .mainEl{
+    margin: 0px;
+    padding: 0px;
+   
+}
+
+  .tui-pagination{
+    width: 768px;
+    max-width: 768px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  }
+  
+    .nameLogogo{
+    display: none;
+  }
+
+  .form{
+    width: 400px;
+  }
+}
