@@ -63,8 +63,38 @@ function fetchPage(query, token, offset) {
         });
 }
 
+function start(queryOne) {
+    getToken().then(token => {
+        myToken = token.access_token
+        getMusic(queryOne, myToken).then((data) => {
+            allContent = data.tracks.total;
+            renderTracks(data.tracks.items); // render first page
+            const pagination = new tui.Pagination('tui-pagination-container', {
+                totalItems: allContent,
+                itemsPerPage: 20,
+                visiblePages: 5,
+                page: 1,
+                centerAlign: true,
+                template: {
+                    page: '<a href="#" class="custom-page">{{page}}</a>',
+                    currentPage: '<strong class="custom-page selected">{{page}}</strong>',
+                    moveButton: '<a href="#" class="custom-move {{type}}">{{type}}</a>',
+                    disabledMoveButton: '<span class="custom-move disabled {{type}}">{{type}}</span>',
+                    moreButton: '<a href="#" class="custom-ellipsis">...</a>'
+                }
 
+            });
 
+            pagination.on('afterMove', (event) => {
+                const currentPage = event.page;
+                const offset = (currentPage - 1) * 20;
+
+                fetchPage(query, myToken, offset);
+            });
+        })
+    })
+}
+ start('newjeans')
 
 
 let allContent
