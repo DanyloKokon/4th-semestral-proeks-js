@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@heroui/pagination": "^2.2.24",
+    "@netlify/vite-plugin": "^2.7.7",
     "body": "^5.1.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "gh-pages": "^6.3.0",
