@@ -18,7 +18,7 @@ export default defineConfig({
     },
     outDir: '../dist',
   },
-  plugins: [injectHTML(), FullReload(['./src/**/**.html'])],
-   plugins: [netlify()],
+  plugins: [injectHTML(), FullReload(['./src/**/**.html']), netlify()],
+   
 })
 
